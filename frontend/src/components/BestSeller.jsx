@@ -1,7 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext,  useState } from 'react'
 import { ShopContext } from '../context/ShopContext'
-import Title from './Title';
-import ProductItem from './ProductItem';
+import Title from '../components/Title'
+import ProductItem from '../components/ProductItem';
+import { useEffect } from 'react';
 
 
 
@@ -11,10 +12,24 @@ const BestSeller = () => {
     const [bestSeller,setBestSeller] =useState([]);
 
 
-    useEffect(()=>{
-        const bestProduct = products.filter((item)=>(item.bestSeller))
-        setBestSeller(bestProduct.slice(0,5))
-    },[])
+ 
+
+
+
+    // useEffect(()=>{
+    //     const bestProduct = products.filter((item)=>(item.bestSeller))
+    //     setBestSeller(bestProduct.slice(0,5))
+    // },[])
+
+    useEffect(() => {
+        if (products?.length) {
+            const bestProduct = products.filter((item) => item.bestSeller);
+            setBestSeller(bestProduct.slice(0, 5));
+        }
+    }, [products]); // Added products as a dependency
+    
+   
+    
 
   return (
     <div className='my-10'>
